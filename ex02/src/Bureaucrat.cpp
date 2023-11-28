@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 11:12:52 by pvong             #+#    #+#             */
-/*   Updated: 2023/11/28 11:38:08 by pvong            ###   ########.fr       */
+/*   Updated: 2023/11/28 13:44:28 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void Bureaucrat::whichException(int grade) {
     }
 }
 
-void Bureaucrat::signForm(Form &f) {
+void Bureaucrat::signForm(AForm &f) {
     try {
         f.beSigned(*this);
         std::cout << this->getName() << " signed " << f.getName() << std::endl;

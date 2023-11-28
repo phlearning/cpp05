@@ -6,14 +6,14 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 11:01:05 by pvong             #+#    #+#             */
-/*   Updated: 2023/11/28 11:25:03 by pvong            ###   ########.fr       */
+/*   Updated: 2023/11/28 13:43:58 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <string>
 #include <iostream>
 #include <stdexcept>
@@ -52,7 +52,7 @@
 
 #endif
 
-class Form;
+class AForm;
 
 class Bureaucrat {
     
@@ -69,7 +69,7 @@ public:
     int getGrade(void) const; // Getters
     void incrementGrade(void);
     void decrementGrade(void);
-    void signForm(Form &f);
+    void signForm(AForm &f);
 
     // My exceptions
     class GradeTooHigh : public std::exception {

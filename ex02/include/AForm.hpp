@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:17:18 by pvong             #+#    #+#             */
-/*   Updated: 2023/11/28 11:40:09 by pvong            ###   ########.fr       */
+/*   Updated: 2023/11/28 16:40:15 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef AFORM_HPP
+#define AFORM_HPP
 
 #include "Bureaucrat.hpp"
 #include <string>
@@ -20,20 +20,22 @@
 
 class Bureaucrat;
 
-class Form {
+class AForm {
     
 public:
-    ~Form(void);
-    Form(const Form &src);
+    ~AForm(void);
+    AForm(const AForm &src);
     
-    Form(std::string name, int gradeToSign, int gradeToExecute);
+    AForm(std::string name, int gradeToSign, int gradeToExecute);
     
-    void beSigned(Bureaucrat &b);
+    void beSigned(Bureaucrat &b)    ;
 
     bool getSigned(void) const;
     std::string getName(void) const;
     int getGradeRequiredToSign(void) const;
     int getGradeRequiredToExecute(void) const;
+
+    virtual void execute(Bureaucrat const &executor) const = 0;
 
     class GradeTooHigh : public std::exception {
     public:
@@ -51,13 +53,13 @@ private:
     const int _gradeRequiredToSign;
     const int _gradeRequiredToExecute;
 
-    Form(void);
-    Form &operator=(const Form &other);
+    AForm(void);
+    AForm &operator=(const AForm &other);
 
     void whichException(int grade, std::string whichGrade);
 
 };
 
-std::ostream &operator<<(std::ostream &output, const Form &form);
+std::ostream &operator<<(std::ostream &output, const AForm &form);
 
 #endif

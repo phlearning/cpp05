@@ -6,11 +6,12 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 11:13:21 by pvong             #+#    #+#             */
-/*   Updated: 2023/11/28 13:12:07 by pvong            ###   ########.fr       */
+/*   Updated: 2023/11/28 16:41:49 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include <iomanip>
 
 #define WIDTH 40
@@ -26,53 +27,16 @@ void printMsg(const std::string &message, char separatorChar, int totalWidth, st
               << std::setw(rightSeparatorWidth) << std::setfill(separatorChar) << "" << RESET << std::endl;
 }
 
-void attemptInvalidForm1(void) {
-    printMsg(__func__, '=', WIDTH, BOLDBLACK);
-    try {
-        Form form("hello", 0, 50);
-        std::cout << form << std::endl;
-    } catch (std::exception &e) {
-        std::cout << "Exception: " << e.what() << std::endl;
-    }
-    std::cout << std::endl;
-}
-
-void attemptInvalidForm2(void) {
-    printMsg(__func__, '=', WIDTH, BOLDBLACK);
-    try {
-        Form form("hello", 50, 0);
-        std::cout << form << std::endl;
-    } catch (std::exception &e) {
-        std::cout << "Exception: " << e.what() << std::endl;
-    }
-    std::cout << std::endl;
-}
-
-void attemptInvalidGradeRequired(void) {
-    printMsg(__func__, '=', WIDTH, BOLDBLACK);
-    try {
-        Form form("hello", 50, 50);
-        std::cout << form << std::endl;
-        Bureaucrat bureaucrat("test", 51);
-        bureaucrat.signForm(form);
-        std::cout << form << std::endl;
-    } catch (std::exception &e) {
-        std::cout << "Exception: " << e.what() << std::endl;
-    }
-    std::cout << std::endl;
-}
-
 int main() {
-    attemptInvalidForm1();
-    attemptInvalidForm2();
-    attemptInvalidGradeRequired();
+
     printMsg("Main", '=', WIDTH, BOLDWHITE);
     try {
-        Form form("hello", 50, 50);
-        std::cout << form << std::endl;
+        ShrubberyCreationForm test("target");
+        std::cout << test << std::endl;
         Bureaucrat bureaucrat("test", 49);
-        bureaucrat.signForm(form);
-        std::cout << form << std::endl;
+        bureaucrat.signForm(test);
+        test.execute(bureaucrat);
+        std::cout << test << std::endl;
     } catch (std::exception &e) {
         std::cout << "Exception: " << e.what() << std::endl;
     }

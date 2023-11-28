@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:29:50 by pvong             #+#    #+#             */
-/*   Updated: 2023/11/28 11:41:20 by pvong            ###   ########.fr       */
+/*   Updated: 2023/11/28 13:43:00 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
 /* -------------------------------------------------------------------------- */
 /*                                MY EXCEPTIONS                               */
 /* -------------------------------------------------------------------------- */
 
-const char *Form::GradeTooHigh::what() const throw() {
+const char *AForm::GradeTooHigh::what() const throw() {
     return ("Grade is too high!");
 }
 
-const char *Form::GradeTooLow::what() const throw() {
+const char *AForm::GradeTooLow::what() const throw() {
     return ("Grade is too low!");
 }
 
@@ -29,30 +29,30 @@ const char *Form::GradeTooLow::what() const throw() {
 /* -------------------------------------------------------------------------- */
 
 // Private
-Form::Form(void) : _signed(false), _name("Unnamed form"), _gradeRequiredToSign(0), _gradeRequiredToExecute(0) {
+AForm::AForm(void) : _signed(false), _name("Unnamed form"), _gradeRequiredToSign(0), _gradeRequiredToExecute(0) {
     if (SHOWMSG) {
-        std::cout << COLOR("Form: Default constructor called.", GREEN) << std::endl;
+        std::cout << COLOR("AForm: Default constructor called.", GREEN) << std::endl;
     }
 }
 
-Form::Form(const Form &src) : _signed(src._signed), _name(src._name), _gradeRequiredToSign(src._gradeRequiredToSign), _gradeRequiredToExecute(src._gradeRequiredToExecute) {
+AForm::AForm(const AForm &src) : _signed(src._signed), _name(src._name), _gradeRequiredToSign(src._gradeRequiredToSign), _gradeRequiredToExecute(src._gradeRequiredToExecute) {
     if (SHOWMSG) {
-        std::cout << COLOR("Form copy constructor called: ", GREEN) << this->_name << std::endl;
+        std::cout << COLOR("AForm copy constructor called: ", GREEN) << this->_name << std::endl;
     }
 }
 
 // Private
-Form &Form::operator=(const Form &other) {
+AForm &AForm::operator=(const AForm &other) {
     if (SHOWMSG) {
-        std::cout << COLOR("Form copy assignment operator called: ", GREEN) << std::endl;
+        std::cout << COLOR("AForm copy assignment operator called: ", GREEN) << std::endl;
     }
     this->_signed = other._signed;
     return (*this);
 }
 
-Form::~Form(void) {
+AForm::~AForm(void) {
     if (SHOWMSG) {
-        std::cout << COLOR("Form destructor called.", RED) << std::endl;
+        std::cout << COLOR("AForm destructor called.", RED) << std::endl;
     }
 }
 
@@ -60,11 +60,11 @@ Form::~Form(void) {
 /*                               MY CONSTRUCTOR                               */
 /* -------------------------------------------------------------------------- */
 
-Form::Form(std::string name, int gradeToSign, int gradeToExecute) : _signed(false), _name(name), _gradeRequiredToSign(gradeToSign), _gradeRequiredToExecute(gradeToExecute) {
+AForm::AForm(std::string name, int gradeToSign, int gradeToExecute) : _signed(false), _name(name), _gradeRequiredToSign(gradeToSign), _gradeRequiredToExecute(gradeToExecute) {
     whichException(gradeToSign, "Grade required to sign");
     whichException(gradeToExecute, "Grade required to execute");
     if (SHOWMSG) {
-        std::cout << COLOR("Form constructor called: ", GREEN) << name << ", " << gradeToSign << ", " << gradeToExecute << std::endl;
+        std::cout << COLOR("AForm constructor called: ", GREEN) << name << ", " << gradeToSign << ", " << gradeToExecute << std::endl;
     }
 }
 
@@ -72,7 +72,7 @@ Form::Form(std::string name, int gradeToSign, int gradeToExecute) : _signed(fals
 /*                              MEMBER FUNCTIONS                              */
 /* -------------------------------------------------------------------------- */
 
-void Form::beSigned(Bureaucrat &b) {
+void AForm::beSigned(Bureaucrat &b) {
     if (b.getGrade() <= this->_gradeRequiredToSign) {
         this->_signed = true;
     } else {
@@ -80,36 +80,36 @@ void Form::beSigned(Bureaucrat &b) {
     }
 }
 
-bool Form::getSigned(void) const {
+bool AForm::getSigned(void) const {
     return (this->_signed);
 }
 
-std::string Form::getName(void) const {
+std::string AForm::getName(void) const {
     return (this->_name);
 }
 
-int Form::getGradeRequiredToSign(void) const {
+int AForm::getGradeRequiredToSign(void) const {
     return (this->_gradeRequiredToSign);
 }
 
-int Form::getGradeRequiredToExecute(void) const {
+int AForm::getGradeRequiredToExecute(void) const {
     return (this->_gradeRequiredToExecute);
 }
 
-void Form::whichException(int grade, std::string whichGrade) {
+void AForm::whichException(int grade, std::string whichGrade) {
     if (grade < 1) {
-        std::cout << "Form: " << whichGrade << ": ";
+        std::cout << "AForm: " << whichGrade << ": ";
         throw GradeTooHigh();
     } else if (grade > 150) {
-        std::cout << "Form: " << whichGrade << ": ";
+        std::cout << "AForm: " << whichGrade << ": ";
         throw GradeTooLow();
     }
 }
 
 /* -------------------------------------------------------------------------- */
 
-std::ostream &operator<<(std::ostream &output, const Form &form) {
-    output << "Form " << form.getName() << ": signed(" << (form.getSigned() ? "Yes" : "No") << "), gradeToSign(" << form.getGradeRequiredToSign() 
+std::ostream &operator<<(std::ostream &output, const AForm &form) {
+    output << "AForm " << form.getName() << ": signed(" << (form.getSigned() ? "Yes" : "No") << "), gradeToSign(" << form.getGradeRequiredToSign() 
     << "), gradeToExecute("
     << form.getGradeRequiredToExecute() << ").";
     return output;
