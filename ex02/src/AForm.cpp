@@ -24,6 +24,10 @@ const char *AForm::GradeTooLow::what() const throw() {
     return ("Grade is too low!");
 }
 
+const char *AForm::FormNotSigned::what() const throw() {
+    return ("Form is not signed!");
+}
+
 /* -------------------------------------------------------------------------- */
 /*                               CANONICAL FORM                               */
 /* -------------------------------------------------------------------------- */
@@ -106,10 +110,27 @@ void AForm::whichException(int grade, std::string whichGrade) {
     }
 }
 
+void AForm::execute(Bureaucrat const &executor) const {
+    try {
+        if (!this->_signed) {
+            throw (FormNotSigned());
+        } else if (executor.getGrade() > this->_gradeRequiredToExecute) {
+            throw (GradeTooLow());
+        } else {
+            executeForm();
+        }
+    } catch (GradeTooLow &e) {
+        std::cout << COLOR("ExceptionGradeToExecute: ", YELLOW) << e.what() << std::endl;
+    } catch (FormNotSigned &e) {
+        std::cout << COLOR("ExceptionForm: ", YELLOW) << e.what() << std::endl;
+    }
+
+}
+
 /* -------------------------------------------------------------------------- */
 
 std::ostream &operator<<(std::ostream &output, const AForm &form) {
-    output << "AForm " << form.getName() << ": signed(" << (form.getSigned() ? "Yes" : "No") << "), gradeToSign(" << form.getGradeRequiredToSign() 
+    output << "Form " << COLOR(form.getName(), CYAN) << ": signed(" << (form.getSigned() ? "Yes" : "No") << "), gradeToSign(" << form.getGradeRequiredToSign() 
     << "), gradeToExecute("
     << form.getGradeRequiredToExecute() << ").";
     return output;

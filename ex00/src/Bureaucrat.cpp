@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 11:12:52 by pvong             #+#    #+#             */
-/*   Updated: 2023/11/29 14:58:44 by pvong            ###   ########.fr       */
+/*   Updated: 2023/11/27 14:17:59 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ Bureaucrat::~Bureaucrat(void) {
 }
 
 /* -------------------------------------------------------------------------- */
-/*                               MY CONSTRUCTOR                               */
+/*                               MY CONSTRUCTORS                              */
 /* -------------------------------------------------------------------------- */
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {
@@ -98,23 +98,6 @@ void Bureaucrat::whichException(int grade) {
     } else if (grade > 150) {
         throw GradeTooLow();
     }
-}
-
-void Bureaucrat::signForm(AForm &f) {
-    try {
-        f.beSigned(*this);
-        std::cout << COLOR(this->getName(), CYAN) << " signed " << COLOR(f.getName(), CYAN) << std::endl;
-    } catch (std::exception &e) {
-        std::cout << COLOR(this->getName(), CYAN) << " couldn't sign " << COLOR(f.getName(), CYAN) << " because " << e.what() << std::endl;
-    }
-}
-
-void Bureaucrat::executeForm(AForm const &form) {
-
-    if (form.getSigned() && getGrade() <= form.getGradeRequiredToExecute()) {
-        std::cout << COLOR(getName(), CYAN) << " executed " << COLOR(form.getName(), CYAN) << std::endl;
-    }
-    form.execute(*this);
 }
 
 /* -------------------------------------------------------------------------- */

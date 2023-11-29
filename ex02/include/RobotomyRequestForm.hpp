@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:10:03 by pvong             #+#    #+#             */
-/*   Updated: 2023/11/28 16:14:14 by pvong            ###   ########.fr       */
+/*   Updated: 2023/11/29 14:33:47 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ public:
     RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 
     RobotomyRequestForm(const std::string target);
-    
-    virtual void execute(Bureaucrat const &executor);
 
 private:
     std::string _target;
-}
+    void executeForm(void) const;
+};
 
 #endif

@@ -6,7 +6,7 @@
 #    By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 12:24:45 by pvong             #+#    #+#              #
-#    Updated: 2023/11/29 14:41:54 by pvong            ###   ########.fr        #
+#    Updated: 2023/11/27 11:13:14 by pvong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,12 +29,8 @@ SRC_DIR = src
 OBJ_DIR = obj
 
 SRC = main.cpp \
-		Bureaucrat.cpp \
-		AForm.cpp \
-		ShrubberyCreationForm.cpp \
-		RobotomyRequestForm.cpp \
-		PresidentialPardonForm.cpp
-		
+		Bureaucrat.cpp 
+
 SRC := $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ := $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC))
 

@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 13:54:49 by pvong             #+#    #+#             */
-/*   Updated: 2023/11/29 14:02:03 by pvong            ###   ########.fr       */
+/*   Created: 2023/11/28 15:10:03 by pvong             #+#    #+#             */
+/*   Updated: 2023/11/29 15:41:25 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHRUBBERYCREATIONFORM_HPP
-#define SHRUBBERYCREATIONFORM_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+#define ROBOTOMYREQUESTFORM_HPP
 
 #include "AForm.hpp"
-#include <fstream>
 #include <string>
 
-class ShrubberyCreationForm : public AForm {
+class RobotomyRequestForm : public AForm {
 
-public:
-    ShrubberyCreationForm(void);
-    virtual ~ShrubberyCreationForm(void);
-    ShrubberyCreationForm(const ShrubberyCreationForm &src);
-    ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
+public: 
+    RobotomyRequestForm(void);
+    virtual ~RobotomyRequestForm(void);
+    RobotomyRequestForm(const RobotomyRequestForm &src);
+    RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 
-    ShrubberyCreationForm(const std::string target);
-
+    RobotomyRequestForm(const std::string target);
 
 private:
     std::string _target;
     void executeForm(void) const;
 };
-
 
 #endif

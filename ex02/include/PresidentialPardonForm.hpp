@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:02:25 by pvong             #+#    #+#             */
-/*   Updated: 2023/11/28 16:14:09 by pvong            ###   ########.fr       */
+/*   Updated: 2023/11/29 14:42:50 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,19 @@
 #include "AForm.hpp"
 #include <string>
 
-class PresidentialRequestForm : public AForm {
+class PresidentialPardonForm : public AForm {
 
 public: 
-    PresidentialRequestForm(void);
-    virtual ~PresidentialRequestForm(void);
-    PresidentialRequestForm(const PresidentialRequestForm &src);
-    PresidentialRequestForm &operator=(const PresidentialRequestForm &other);
+    PresidentialPardonForm(void);
+    virtual ~PresidentialPardonForm(void);
+    PresidentialPardonForm(const PresidentialPardonForm &src);
+    PresidentialPardonForm &operator=(const PresidentialPardonForm &other);
 
-    PresidentialRequestForm(const std::string target);
-    
-    virtual void execute(Bureaucrat const &executor);
+    PresidentialPardonForm(const std::string target);
 
 private:
     std::string _target;
-}
+    void executeForm(void) const;
+};
 
 #endif
