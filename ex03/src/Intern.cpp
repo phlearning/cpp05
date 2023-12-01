@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:31:09 by pvong             #+#    #+#             */
-/*   Updated: 2023/11/29 16:51:49 by pvong            ###   ########.fr       */
+/*   Updated: 2023/12/01 11:43:40 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,17 @@ Intern::~Intern(void) {
 AForm *Intern::makeForm(const std::string name, std::string target) {
     
     std::string myForms[] = {"ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm"};
+
+    /* With typedef */
+    // typedef AForm* (Intern::*FunctionPointers)(const std::string);
+
+    // FunctionPointers makeDifferentForms[] = {
+    //     &Intern::_makeShrubbery,
+    //     &Intern::_makeRobotomy,
+    //     &Intern::_makePresidential
+    // };
+
+    /* Without typedef */
     AForm* (Intern::*makeDifferentForms[])(const std::string) = {
         &Intern::_makeShrubbery,
         &Intern::_makeRobotomy,
